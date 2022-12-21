@@ -6,7 +6,7 @@ node{
     }
 stage('Build Project'){
         def mvnHome = tool name: 'maven', type: 'maven'
-    sh "${pwd}"/claims.API:/usr/src/mymaven -w /usr/src/mymaven maven:latest mvn clean package
+          sh "${mvnHome}/bin/mvn package"
           echo "Executed Successfully Project1"
     }
 }
