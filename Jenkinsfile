@@ -5,7 +5,7 @@ node{
     }
    
     stage("Docker build"){
-    sh 'docker build -t eurekaserver:latest .'
+    sh 'docker build -t eurekaserver:latest'
         sh 'docker image ls'
     }
 
