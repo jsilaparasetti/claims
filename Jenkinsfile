@@ -6,7 +6,7 @@ node{
     }
 stage('Build Project'){
         def mvnHome = tool name: 'maven', type: 'maven'
-          sh "${mvnHome}/bin/mvn package"
+          sh "docker run -it --rm --name my-maven-project -v "$(pwd)"/claims.API:/usr/src/mymaven -w /usr/src/mymaven maven:latest mvn clean package"
           echo "Executed Successfully Project1"
     }
 }
