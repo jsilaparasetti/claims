@@ -8,8 +8,8 @@ node{
     sh 'docker build -t ineeladri/claims.api_image:latest -f Dockerfile .'
         sh 'docker image ls'
     }
-   withCredentials([string(credentialsId: 'ineeladri', variable: 'Miracle#12')]) {
-        sh 'docker login -u ineeladri -p $Miracle#12'
+   withCredentials([string(credentialsId: 'dockerhub', variable: 'PASSWORD')]) {
+        sh 'docker login -u dockerhub -p $PASSWORD'
     }
 
 } 
