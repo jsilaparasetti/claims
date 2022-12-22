@@ -8,7 +8,7 @@ node{
     sh 'docker build -t ineeladri/claims.api_image:latest -f Dockerfile .'
         sh 'docker image ls'
     }
-   withCredentials([string(credentialsId: 'ineeladri', variable: 'PASSWORD')]) {
+   withCredentials([string(credentialsId: 'dockerhub', variable: 'PASSWORD')]) {
         sh 'docker login -u ineeladri -p $PASSWORD'
     }
 
