@@ -12,10 +12,4 @@ node{
         sh 'docker login -u ineeladri -p $PASSWORD'
     }
 
-    stage("Pushing Image to Docker Hub"){
-     
-       sh 'docker push ineeladri/claims.api_image:latest'
-       }
-}
-
-   
+} 
