@@ -5,7 +5,7 @@ node{
     }
    
     stage("Docker build"){
-    sh 'docker build -t eurekaserver:latest'
+    sh 'docker build -t apurva09/myclaims_image:latest .'
         sh 'docker image ls'
     }
 
@@ -15,7 +15,7 @@ node{
 
     stage("Pushing Image to Docker Hub"){
      
-       sh 'docker push eurekaserver:latest'
+       sh 'docker push apurva09/myclaims_image:latest'
        }
     post {
         always {
