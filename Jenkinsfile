@@ -5,7 +5,7 @@ node{
     }
    
     stage("Docker build"){
-    sh 'docker build -t jsilaparasetti/customer_image:latest -f Dockerfile .'
+    sh 'docker build -t jsilaparasetti/claims.api_image:latest -f Dockerfile .'
         sh 'docker image ls'
     }
 
