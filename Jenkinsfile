@@ -1,10 +1,5 @@
-pipeline {
-  agent {
-        node {
-            label 'docker'
-        }
-    }
-   stage("Git Clone"){
+node {
+      stage("Git Clone"){
 
         git branch: 'main', url: 'https://github.com/jsilaparasetti/claims.git'
     }
