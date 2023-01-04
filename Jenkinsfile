@@ -9,7 +9,7 @@ node {
         sh 'docker image ls'
     }
 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'apurva09', passwordVariable: 'password')]) {
-   sh "docker login -u apurva09 -p ${password}"
+   sh 'docker login -u $apurva09 --password-stdin'
 	}
     stage("Pushing Image to Docker Hub"){
 	  
