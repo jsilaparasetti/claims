@@ -1,67 +1,20 @@
-pipeline {
-  agent {
-        node {
-            label 'docker'
-        }
-    }
-    options {
-        timestamps()
-    }
+node{
+   stage("Git Clone"){
 
-    environment {
-
-        IMAGE = readMavenPom().getArtifactId()
-        VERSION = readMavenPom().getVersion()
+        git branch: 'main', url: 'https://github.com/jsilaparasetti/claims.git'
+    }
+   
+    stage("Docker build"){
+    sh 'docker build -t apurva09/claims_image:latest -f Dockerfile .'
+        sh 'docker image ls'
+    }
+withCredentials([string(credentialsId: 'apurva09', variable: 'PASSWORD')]) {
+        sh 'docker login -u apurva09 -p $PASSWORD'
     }
 
-    stages {
-        stage('Build') {
-            agent {
-                docker {
-
-                    reuseNode true
-                    image 'maven:3.8.5-jdk-17'
-                }
-            }
-            steps {
-
-                withMaven(options: [findbugsPublisher(), junitPublisher(ignoreAttachments: false)]) {
-                    sh 'mvn clean findbugs:findbugs package'
-                }
-            }
-            post {
-                success {
-
-                    archiveArtifacts(artifacts: '**/target/*.jar', allowEmptyArchive: true)
-                }
-            }
-        }
-
-
-
-        stage('Build and Publish Image') {
-            when {
-                branch 'develop'  //only run these steps on the develop branch
-            }
-            steps {
-
-                sh """
-          docker build -t ${IMAGE} .
-          docker tag ${IMAGE} ${IMAGE}:${VERSION}
-          docker push ${IMAGE}:${VERSION}
-
-        """
-        }
-            }
-        }
-    }
-
-    post {
-        failure {
-
-            mail to: 'praneethavattipalli16@gmail.com',
-                    subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                    body: "Something is wrong with ${env.BUILD_URL}"
-        }
+    stage("Pushing Image to Docker Hub"){
+       sh 'docker push apurva09/claims_image:latest'
     }
 }
+
+  
