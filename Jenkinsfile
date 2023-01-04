@@ -5,7 +5,7 @@ node{
     }
    
     stage("Docker build"){
-    sh 'docker build -t apurva09/claims_image:latest -f Dockerfile .'
+    sh 'docker build -t test/claims_image:latest -f Dockerfile .'
         sh 'docker image ls'
     }
 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'apurva09', passwordVariable: 'password')]) {
