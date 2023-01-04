@@ -1,4 +1,5 @@
 pipeline{
+	agent {
    stage("Git Clone"){
 
         git branch: 'main', url: 'https://github.com/jsilaparasetti/claims.git'
@@ -18,6 +19,7 @@ withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 
         sh 'docker tag 518b08410256 apurva09/claims.api:latest'
 		 sh 'docker push apurva09/claims.api:latest'
     }
+}
 }
 
   
