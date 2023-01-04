@@ -15,6 +15,7 @@ withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 
 	  
         sh 'docker tag 1abac3823d5d apurva09/apurva09/claims_image:latest'
 		sh 'echo $dockerhub PSW | docker login -u $dockerhub_apurva09 --password-stdin'
+	    sh 'docker login -u --password-stdin'
 	  sh 'docker push apurva09/apurva09/claims_image:latest'
     }
 }
