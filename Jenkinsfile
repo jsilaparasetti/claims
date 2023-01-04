@@ -5,7 +5,7 @@ node {
     }
    
     stage("Docker build"){
-    sh 'docker build -t apurva09/claims_image:latest -f Dockerfile .'
+    sh 'docker build -t claims:latest -f Dockerfile .'
         sh 'docker image ls'
     }
 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'apurva09', passwordVariable: 'password')]) {
@@ -13,8 +13,8 @@ withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 
 	}
     stage("Pushing Image to Docker Hub"){
 	  
-        sh 'docker tag 1abac3823d5d apurva09/apurva09/claims_image:latest'
-		sh 'echo $DOCKER_password | docker login -u $DOCKER_apurva09 --password-stdin'
-	  sh 'docker push apurva09/apurva09/claims_image:latest'
+        sh 'docker tag  53231807e12d apurva09/claims:latest'
+	sh 'echo $DOCKER_password | docker login -u $DOCKER_apurva09 --password-stdin'
+	  sh 'docker push apurva09/claims:latest'
     }
 }
