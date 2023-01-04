@@ -13,7 +13,7 @@ withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable:
 	}
     stage("Pushing Image to Docker Hub"){
 	  
-        sh 'docker tag  53231807e12d apurva09/claims:latest'
+        sh 'docker tag  1abac3823d5d apurva09/claims:latest'
 	  sh 'docker push apurva09/claims:latest'
     }
 }
