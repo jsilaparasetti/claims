@@ -1,5 +1,9 @@
-pipeline{
-	agent {
+pipeline {
+  agent {
+        node {
+            label 'docker'
+        }
+    }
    stage("Git Clone"){
 
         git branch: 'main', url: 'https://github.com/jsilaparasetti/claims.git'
@@ -20,6 +24,6 @@ withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 
 		 sh 'docker push apurva09/claims.api:latest'
     }
 }
-}
+
 
   
