@@ -12,6 +12,7 @@ withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 
   sh 'echo $apurva09'
   echo password
   echo "username is $apurva09"
+	docker login -u "myusername" -p "mypassword" docker.io
 }
 
     stage("Pushing Image to Docker Hub"){
