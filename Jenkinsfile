@@ -8,7 +8,7 @@ node {
     sh 'docker build -t apurva09/claims_image:latest -f Dockerfile .'
         sh 'docker image ls'
     }
-withCredentials([string(credentialsId: 'test', username: 'apurva09', variable: 'password')]) {
+withCredentials([string(credentialsId: 'test', usernameVariable: 'apurva09', passwordVariable: 'password')]) {
         sh 'docker login -u apurva09 -p $password'
 	}
     stage("Pushing Image to Docker Hub"){
