@@ -8,10 +8,10 @@ node {
     sh 'docker build -t apurva09/claims_image:latest -f Dockerfile .'
         sh 'docker image ls'
     }
-withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'password')]) {
+withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'apurva09')]) {
     sh '''
       set +x
-      curl -u "$password" https://private.server/ > output
+      curl -u "$apurva09" https://private.server/ > output
     '''
 	}
     stage("Pushing Image to Docker Hub"){
