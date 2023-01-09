@@ -24,7 +24,14 @@ withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'test',
     remote.password = 'Miracle@1234'
     remote.allowAnyHosts = true
 }
- stage('Run Docker container on remote hosts') {
-sh "docker -H ssh://azureuser@20.163.181.235 run -d -p 9000:9000 apurva09/claims.api"
+ stage('BuildInside') {
+         docker.image('claims.api').withRun('-d=true -p 9000:9000') {c ->
+            docker.image('claims.api').inside{
+               /*  Do something here inside container  */
+               sh "ls"
+            }
+        }
+  }
+	 
 }
 }
