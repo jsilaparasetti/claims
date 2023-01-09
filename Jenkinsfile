@@ -16,15 +16,15 @@ withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'test',
 	   sh 'docker push apurva09/claims.api:latest'
     }
 	
-  stage("SSH Into Server") {
+ stage("SSH Into Server") {
     def remote = [:]
-    remote.name = 'VMforPractice'
-    remote.host = '172.174.113.233'
-    remote.user = 'azure_practice'
-    remote.password = 'Miracleprac_123'
+    remote.name = 'VMububtu18.0'
+    remote.host = '20.163.181.235'
+    remote.user = 'azureuser'
+    remote.password = 'Miracle@1234'
     remote.allowAnyHosts = true
 }
  stage('Run Docker container on remote hosts') {
-sh "docker -H ssh://azure_practice@172.174.113.233 run -d -p 9000:9000 apurva09/claims.api"
+sh "docker -H ssh://azureuser@20.163.181.235 run -d -p 9000:9000 apurva09/claims.api"
 }
 }
