@@ -32,6 +32,5 @@ withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'test',
             }
         }
   }
-	 
-}
-}
+	 }
+
