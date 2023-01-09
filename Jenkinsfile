@@ -15,4 +15,9 @@ withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'test',
 	     sh 'docker tag fbb841198676 apurva09/claims:latest'
 	   sh 'docker push apurva09/claims:latest'
     }
+ stage('Run Docker container on remote hosts') {
+steps {
+sh "docker -H ssh://azure_practice@172.174.113.233 run -d -p 9000:9000 apurva09/claims"
+}
+}
 }
