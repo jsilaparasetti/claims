@@ -25,12 +25,8 @@ withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'test',
     remote.allowAnyHosts = true
 }
  stage('BuildInside') {
-         docker.image('claims.api').withRun('-d=true -p 9000:9000') {c ->
-            docker.image('claims.api').inside{
-               /*  Do something here inside container  */
-               sh "ls"
+         docker.image('claims.api').withRun('-d=true -p 9000:9000') 
+         sh "ls"
             }
-        }
-  }
-	 }
+       }
 
