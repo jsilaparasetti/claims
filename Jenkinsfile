@@ -25,7 +25,7 @@ withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'test',
     remote.allowAnyHosts = true
 }
  stage('run container') {
-         sh 'docker run -p 9000:9000 apurva09/claims'
+         sh 'docker run -d -p 9000:9000 apurva09/claims'
          
             }
        }
