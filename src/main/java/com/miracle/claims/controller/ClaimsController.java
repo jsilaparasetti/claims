@@ -57,7 +57,7 @@ public class ClaimsController {
 			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
 			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
 	@GetMapping("/")
-	public ResponseEntity<List<Claims>> getAllClaims() {
+	public ResponseEntity<List<Claim>> getAllClaims() {
 		return claimsServices.getAllClaims();
 	}
 
@@ -78,7 +78,7 @@ public class ClaimsController {
 			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
 			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
 	@GetMapping("/{serviceProviderClaimId}")
-	public ResponseEntity<Claims> getClaimsByServiceProviderClaimId(
+	public ResponseEntity<Claim> getClaimsByServiceProviderClaimId(
 			@ApiParam(value = "Service Provide Claim Id", required = true) @PathVariable Long serviceProviderClaimId) {
 		return new ResponseEntity<Claim>(claimsServices.getClaim(serviceProviderClaimId), new HttpHeaders(),
 				HttpStatus.OK);
@@ -101,8 +101,8 @@ public class ClaimsController {
 			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
 			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
 	@PostMapping("/addclaims")
-	public ResponseEntity<Claims> createClaims(
-			@ApiParam(value = "Claim Request", required = true) @RequestBody Claim claims) {
+	public ResponseEntity<Claim> createClaims(
+			@ApiParam(value = "Claim Request", required = true) @RequestBody Claim claim) {
 		return claimsServices.createClaims(claim);
 	}
 
@@ -126,7 +126,7 @@ public class ClaimsController {
 	@PutMapping("/{serviceProviderClaimId}")
 	public ResponseEntity<Claim> updateClaim(
 			@ApiParam(value = "Service Provider Claim Id", required = true) @PathVariable Long serviceProviderClaimId,
-			@ApiParam(value = "Claim Request", required = true) @RequestBody Claim claims) {
+			@ApiParam(value = "Claim Request", required = true) @RequestBody Claim claim) {
 		return claimsServices.updateClaims(serviceProviderClaimId, claim);
 	}
 
