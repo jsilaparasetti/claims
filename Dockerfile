@@ -1,6 +1,5 @@
 FROM maven:3.6.0-jdk-11 AS build
 
-LABEL maintainer = "Apurva Bansode"
 
 # Copy folder in docker
 WORKDIR /opt/app
@@ -18,3 +17,4 @@ ENV PORT 9000
 EXPOSE $PORT
 
 ENTRYPOINT ["java","-jar","-Xmx1024M","-Dserver.port=${PORT}","claims.jar"]
+
