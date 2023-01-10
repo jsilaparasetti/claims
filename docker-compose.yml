@@ -1,0 +1,38 @@
+version: '3'
+services:
+  eureka-server:
+    build: /home/azureuser/eurekaserver
+    image: eureka-server
+    ports:
+    - "8761:8761"
+  claims:
+    build: /home/azureuser/claims
+    image: claims
+    container_name: claims
+    ports:
+    - "9000:9000"
+    links:
+    - eureka-server
+    depends_on:
+     - mongodb
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
+  config-server:
+    build: /home/azureuser/configserver
+    image: configserver
+    container_name: config-server
+    ports:
+    - "8888:8888"
+    links:
+    - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
+  mongodb:
+    image : mongo
+    container_name: claimsdb
+    ports:
+      - "2717:27017"
+    restart: unless-stopped
+
+   
+  
