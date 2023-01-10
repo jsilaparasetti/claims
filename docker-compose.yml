@@ -1,14 +1,14 @@
 version: '3'
 services:
-  eureka-server:
+        eureka-server:
     build: /home/azureuser/eurekaserver
     image: eureka-server
     ports:
     - "8761:8761"
-  claims:
+   claims:
     build: /home/azureuser/claims
     image: claims
-    container_name: claims
+    container_name: claims1
     ports:
     - "9000:9000"
     links:
@@ -17,22 +17,70 @@ services:
      - mongodb
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
-  config-server:
+   facility:
+    build: /home/azureuser/facility
+    image: facility
+    container_name: facility1
+    ports:
+    - "9001:9001"
+    links:
+    - eureka-server
+    depends_on:
+     - mongodb2
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
+   mongodb2:
+    image : mongo
+    container_name: facilitydb
+    ports:
+    - "2719:27017"
+    restart: unless-stopped
+   config-server:
     build: /home/azureuser/configserver
     image: configserver
-    container_name: config-server
+    container_name: config-server1
     ports:
     - "8888:8888"
     links:
     - eureka-server
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
-  mongodb:
+   mongodb:
     image : mongo
     container_name: claimsdb
     ports:
-      - "2717:27017"
+     - "2717:27017"
     restart: unless-stopped
+   api-gateway:
+    build: /home/azureuser/apigateway
+    image: apigateway
+    container_name: apigateway
+    depends_on:
+     - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
+    restart: always
+    ports:
+    - "9090:9090"
+   customer:
+    build: /home/azureuser/customer
+    image: customer
+    container_name: customer1
+    ports:
+    - "9002:9002"
+    links:
+    - eureka-server
+    depends_on:
+     - mongodb3
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
+   mongodb3:
+    image : mongo
+    container_name: customerdb
+    ports:
+      - "2718:27017"
+    restart: unless-stopped
+
 
    
   
