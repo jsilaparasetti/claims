@@ -15,5 +15,18 @@ withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'test',
 	     sh 'docker tag claims apurva09/claims:latest'
 	   sh 'docker push apurva09/claims:latest'
     }
- }
+    stage("SSH Into Server") {
+    def remote = [:]
+    remote.name = 'VMububtu18.0'
+    remote.host = '20.163.181.235'
+    remote.user = 'azureuser'
+    remote.password = 'Miracle@1234'
+    remote.allowAnyHosts = true
+}
+ stage('run container') {
+         sh 'docker run -d -p 9000:9000 apurva09/claims'
+         
+      }
+    }
+ 
 
