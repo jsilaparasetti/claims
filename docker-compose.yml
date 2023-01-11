@@ -1,13 +1,14 @@
-version: '3'
+version: '4'
 services:
   claims:
-    #build: /home/azureuser/claims
+    build: .
     image: claims
     container_name: claims
+    restart: always
     ports:
     - "9000:9000"
-    #links:
-    #- eureka-server
+    links:
+    - mongodb
     #environment:
     #  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
    mongodb:
