@@ -55,7 +55,7 @@ public class ClaimsController {
 			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
 	@GetMapping("/claims/health")
 	public ResponseEntity<String> health() {
-		return new ResponseEntity<String>("Claim Application is running, yay!!!", new HttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<String>(" New Claim Application is running, yay!!!", new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	/**
