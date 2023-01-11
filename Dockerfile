@@ -13,7 +13,7 @@ FROM openjdk:11
 
 COPY --from=build /opt/app/target/*.jar claims.jar
 
-ENV PORT 5000
+ENV PORT 9000
 EXPOSE $PORT
 
 ENTRYPOINT ["java","-jar","-Xmx1024M","-Dserver.port=${PORT}","claims.jar"]
