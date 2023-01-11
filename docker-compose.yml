@@ -7,10 +7,10 @@ services:
     restart: always
     ports:
     - "9000:9000"
-    links:
-    - mongodb
     networks:
       - claims_default
+    depends_on:
+     - mongodb
     #environment:
     #  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://20.163.181.235:8761/eureka
    mongodb:
