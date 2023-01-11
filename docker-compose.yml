@@ -15,6 +15,6 @@ services:
     image : mongo
     container_name: claimsdb
     ports:
-     - "2717:27017"
+     - "2720:27017"
     restart: unless-stopped
  
