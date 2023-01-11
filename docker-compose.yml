@@ -1,12 +1,12 @@
 version: '4'
 services:
   claims:
-    build: /claims
+    build: .
     image: claims
     container_name: claims
     restart: always
     ports:
-    - "5000:5000"
+    - "9000:9000"
     links:
     - mongodb
     #environment:
